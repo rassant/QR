@@ -1,0 +1,200 @@
+/*g++ -std=c++17 -O2 -Wall main.cpp -o processor \*/
+/*    $(pkg-config --cflags --libs opencv4) \*/
+/*    -lqrencode*/
+#include <iostream>
+#include <vector>
+#include <filesystem>
+#include <thread>
+#include <mutex>
+#include <opencv2/opencv.hpp>
+#include <qrencode.h>
+
+namespace fs = std::filesystem;
+
+class QRImageProcessor {
+private:
+    std::mutex mtx;
+    /*const cv::Scalar SUN_COLOR = cv::Scalar(0, 255, 255); // Желтый в BGR*/
+    /*const cv::Scalar BG_COLOR = cv::Scalar(255, 255, 255); // Белый*/
+  const cv::Vec3b SUN_COLOR = cv::Vec3b(0, 255, 255); // BGR: жёлтый
+    const cv::Vec3b BG_COLOR = cv::Vec3b(255, 255, 255); // Белый
+public:
+    void processFolder(const std::string& folderPath, size_t threadCount = 4) {
+        std::vector<fs::path> imagePaths = getImagePaths(folderPath);
+        
+        auto worker = [&](size_t start, size_t end) {
+            for (size_t i = start; i < end; ++i) {
+                processImageWithSunQR(imagePaths[i]);
+            }
+        };
+
+        size_t perThread = imagePaths.size() / threadCount;
+        std::vector<std::thread> threads;
+        for (size_t i = 0; i < threadCount; ++i) {
+            size_t start = i * perThread;
+            size_t end = (i == threadCount-1) ? imagePaths.size() : start + perThread;
+            threads.emplace_back(worker, start, end);
+        }
+
+        for (auto& t : threads) t.join();
+    }
+
+private:
+    std::vector<fs::path> getImagePaths(const std::string& folderPath) {
+        std::vector<fs::path> paths;
+        for (const auto& entry : fs::directory_iterator(folderPath)) {
+            if (isImageFile(entry.path())) {
+                paths.push_back(entry.path());
+            }
+        }
+        return paths;
+    }
+
+    bool isImageFile(const fs::path& path) {
+        const std::vector<std::string> extensions = {".jpg", ".jpeg", ".png", ".bmp"};
+        std::string ext = path.extension().string();
+        std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+        return std::find(extensions.begin(), extensions.end(), ext) != extensions.end();
+    }
+
+    void processImageWithSunQR(const fs::path& imagePath) {
+        try {
+            cv::Mat image = cv::imread(imagePath.string(), cv::IMREAD_COLOR);
+            if (image.empty()) return;
+
+            cv::Mat qr = generateSunQRCode(imagePath.string(), image.size());
+            overlayQRCode(image, qr);
+
+            {
+                std::lock_guard<std::mutex> lock(mtx);
+                cv::imwrite(imagePath.string(), image);
+            }
+        } catch (...) {
+            std::cerr << "Error processing: " << imagePath << std::endl;
+        }
+    }
+
+    cv::Mat generateSunQRCode(const std::string& text, const cv::Size& imgSize) {
+        QRcode* qrcode = QRcode_encodeString(text.c_str(), 5, QR_ECLEVEL_H, QR_MODE_8, 1);
+        if (!qrcode) throw std::runtime_error("QR code generation failed");
+
+        const int baseSize = qrcode->width;
+        const int border = 4;
+        const int minSize = 150;
+
+        double maxQRArea = imgSize.area() / 20.0;
+        int finalSize = static_cast<int>(sqrt(maxQRArea));
+        finalSize = std::max(finalSize, minSize);
+
+        cv::Mat qrBase = createBaseQR(qrcode, baseSize, border);
+        addSunDecoration(qrBase);
+        cv::resize(qrBase, qrBase, cv::Size(finalSize, finalSize), 0, 0, cv::INTER_CUBIC);
+        
+        cv::Mat coloredQR = colorizeQR(qrBase);
+        QRcode_free(qrcode);
+        
+        return coloredQR;
+    }
+
+    cv::Mat createBaseQR(QRcode* qrcode, int size, int border) {
+        cv::Mat qr(size + border*2, size + border*2, CV_8UC1, cv::Scalar(255));
+        for (int y = 0; y < size; ++y) {
+            for (int x = 0; x < size; ++x) {
+                if (qrcode->data[y*size + x] & 1) {
+                    cv::circle(qr, cv::Point(x+border, y+border), 1, 
+                              cv::Scalar(0), -1, cv::LINE_AA);
+                }
+            }
+        }
+        return qr;
+    }
+void addSunDecoration(cv::Mat& qr) {
+        cv::Point center(qr.cols/2, qr.rows/2);
+        int radius = qr.rows / 10;
+        
+        // Для одноканального изображения используем скалярные значения
+        cv::circle(qr, center, radius, cv::Scalar(0), -1, cv::LINE_AA);
+        cv::circle(qr, center, radius/2, cv::Scalar(255), -1, cv::LINE_AA);
+
+        // Лучи рисуем белым цветом (скаляр 255 для одноканального)
+        for (int i = 0; i < 360; i += 15) {
+            double angle = i * CV_PI / 180.0;
+            cv::Point pt(
+                center.x + qr.cols/2 * cos(angle),
+                center.y + qr.rows/2 * sin(angle)
+            );
+            cv::line(qr, center, pt, cv::Scalar(255), 2, cv::LINE_AA);
+        }
+    }
+    /*void addSunDecoration(cv::Mat& qr) {*/
+    /*    // Центральное солнце*/
+    /*    cv::Point center(qr.cols/2, qr.rows/2);*/
+    /*    int radius = qr.rows / 10;*/
+    /*    cv::circle(qr, center, radius, cv::Scalar(0), -1, cv::LINE_AA);*/
+    /*    cv::circle(qr, center, radius/2, cv::Scalar(255), -1, cv::LINE_AA);*/
+    /**/
+    /*    // Лучи*/
+    /*    for (int i = 0; i < 360; i += 15) {*/
+    /*        double angle = i * CV_PI / 180.0;*/
+    /*        cv::Point pt(*/
+    /*            center.x + qr.cols/2 * cos(angle),*/
+    /*            center.y + qr.rows/2 * sin(angle)*/
+    /*        );*/
+    /*        cv::line(qr, center, pt, cv::Scalar(255), 2, cv::LINE_AA);*/
+    /*    }*/
+    /*}*/
+
+  cv::Mat colorizeQR(const cv::Mat& qr) {
+        cv::Mat colorQR(qr.size(), CV_8UC3, BG_COLOR);
+        for (int y = 0; y < qr.rows; ++y) {
+            for (int x = 0; x < qr.cols; ++x) {
+                if (qr.at<uchar>(y, x) < 128) {
+                    colorQR.at<cv::Vec3b>(y, x) = SUN_COLOR;
+                }
+            }
+        }
+        return colorQR;
+    }
+    /*cv::Mat colorizeQR(const cv::Mat& qr) {*/
+    /*    cv::Mat colorQR(qr.size(), CV_8UC3, BG_COLOR);*/
+    /*    for (int y = 0; y < qr.rows; ++y) {*/
+    /*        for (int x = 0; x < qr.cols; ++x) {*/
+    /*            if (qr.at<uchar>(y, x) < 128) {*/
+    /*                colorQR.at<cv::Vec3b>(y, x) = SUN_COLOR;*/
+    /*            }*/
+    /*        }*/
+    /*    }*/
+    /*    return colorQR;*/
+    /*}*/
+
+    void overlayQRCode(cv::Mat& mainImage, const cv::Mat& qrCode) {
+        int x = mainImage.cols - qrCode.cols - 20;
+        int y = mainImage.rows - qrCode.rows - 20;
+        x = std::max(x, 0);
+        y = std::max(y, 0);
+        
+        cv::Rect roi(x, y, qrCode.cols, qrCode.rows);
+        cv::Mat destROI = mainImage(roi);
+        qrCode.copyTo(destROI);
+    }
+};
+
+int main(int argc, char** argv) {
+    if (argc < 2) {
+        std::cout << "Usage: " << argv[0] << " <folder_path> [thread_count]" << std::endl;
+        return 1;
+    }
+
+    QRImageProcessor processor;
+    size_t threadCount = (argc > 2) ? std::stoul(argv[2]) : 4;
+    
+    try {
+        processor.processFolder(argv[1], threadCount);
+        std::cout << "Processing completed successfully!" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}

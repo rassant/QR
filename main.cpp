@@ -8,9 +8,11 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+    std::cout << std::endl;
     std::cout << "Использование:\n";
     std::cout << "[a.out] [Папка_откуда_копировать] [Папка_куда_скопировать] [Время_задержки_сканирования]" << std::endl;
-    std::cout << "Например: a.out ./resource/ ./resource/to/ 5" << std::endl << std::endl;
+    std::cout << "Например: a.out ./resource/ ./resource/to/ 5" << std::endl;
+    std::cout << std::endl;
 
     if (argc == 4)
     {
