@@ -1,0 +1,15 @@
+Checks: >
+  -*,
+  modernize-*,
+  performance-*,
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  hicpp-*,
+  readability-*,
+  portability-*
+  
+CheckOptions:
+  - key: cppcoreguidelines-avoid-magic-numbers.AllowedValues
+    value: 0, 1, 2, 3, 4, 8, 16, 32, 64, 100

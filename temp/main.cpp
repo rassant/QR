@@ -135,7 +135,7 @@ private:
     }
 };
 
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
     if (argc < 2) {
         std::cout << "Usage: " << argv[0] << " <path> [thread_count]\n"
                   << "  <path> - image file or directory\n"
@@ -148,9 +148,9 @@ int main(int argc, char** argv) {
 
     try {
         processor.process(argv[1], threadCount);
-        std::cout << "Processing completed successfully!" << std::endl;
+        std::cout << "Processing completed successfully!" << '\n';
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << '\n';
         return 1;
     }
 
