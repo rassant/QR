@@ -1,6 +1,6 @@
 #pragma once
 
-class FileCopying; // Forward declaration
+class FileCopying; 
 
 class FileWatcher {
 public:

@@ -8,15 +8,15 @@
 namespace fs = std::filesystem;
 
 FileCopying::
-FileCopying(const std::string& from, const std::string& to) 
-    : from_(from), to_(to) 
+FileCopying(const std::string& from, const std::string& to, const int wait_second) 
+    : from_(from), to_(to), wait_second_(wait_second) 
 {
     ValidateDirectories();
 }
 
 
 void FileCopying::Run() {
-    BuildCRCCache(); // Обновляем кэш перед каждым запуском
+    BuildCRCCache(); // Обновляем кэш перед каждым запуском так как у нас добавляются файлы в папку постоянно
     ProcessFiles();
 }
 
@@ -52,13 +52,13 @@ ProcessFiles() {
     for (const auto& entry : fs::directory_iterator(from_)) {
         if (entry.is_regular_file()) {
             try {
-                ProcessSingleFile(entry.path()); // Вызов без передачи кэша
+                ProcessSingleFile(entry.path());
             } catch (const std::exception& e) {
                 std::cerr << "Error: Обработки файла " << entry.path() << ": " << e.what() << std::endl;
             }
         }
     }
-    std::cout << "Копирование файлов завершено." << std::endl;
+    std::cout << "Следующее копирование файлов через "<< wait_second_<< " секунд."<< std::endl;
 }
 
 
@@ -67,7 +67,7 @@ ProcessSingleFile(const fs::path& source) const {
     const uint32_t source_crc = CalculateCRC(source);
     
     if (target_crc_cache_.count(source_crc)) {
-        std::cout << "Файл уже существует: " << source.filename() << std::endl;
+        /*std::cerr << "Файл уже существует: " << source.filename() << std::endl;*/
         return;
     }
 
