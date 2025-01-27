@@ -1,4 +1,9 @@
+#include <algorithm>
+#include <ranges>
 #include <iostream>
+#include <string>
+#include <string_view>
+#include <type_traits>
 #include <vector>
 #include <filesystem>
 #include <thread>
@@ -44,14 +49,17 @@ private:
             threads.emplace_back(worker, start, end);
         }
 
-        for (auto& t : threads) t.join();
+        for (auto& thread : threads) 
+        { 
+            thread.join();
+        }
     }
 
     void processSingleFile(const std::string& filePath) {
         processImage(fs::path(filePath));
     }
 
-    std::vector<fs::path> getImagePaths(const std::string& folderPath) {
+    static auto getImagePaths(const std::string& folderPath) -> std::vector<fs::path> {
         std::vector<fs::path> paths;
         for (const auto& entry : fs::directory_iterator(folderPath)) {
             if (isImageFile(entry.path())) {
@@ -61,33 +69,33 @@ private:
         return paths;
     }
 
-    bool isImageFile(const fs::path& path) {
+    static auto isImageFile(const fs::path& path) -> bool {
         const std::vector<std::string> extensions = {".jpg", ".jpeg", ".png", ".bmp"};
         std::string ext = path.extension().string();
-        std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
-        return std::find(extensions.begin(), extensions.end(), ext) != extensions.end();
+        std::ranges::transform(ext, ext.begin(), ::tolower);
+        return std::ranges::find(extensions, ext) != extensions.end();
     }
 
     void processImage(const fs::path& imagePath) {
         try {
             cv::Mat image = cv::imread(imagePath.string(), cv::IMREAD_COLOR);
-            if (image.empty()) return;
+            if (image.empty()) { return; }
 
-            cv::Mat qr = generateQRCode(imagePath.string(), image.size());
-            overlayQRCode(image, qr);
+            cv::Mat qr_code = generateQRCode(imagePath.string(), image.size());
+            overlayQRCode(image, qr_code);
 
             {
                 std::lock_guard<std::mutex> lock(mtx);
                 cv::imwrite(imagePath.string(), image);
             }
         } catch (const std::exception& e) {
-            std::cerr << "Error processing " << imagePath << ": " << e.what() << std::endl;
+            std::cerr << "Error processing " << imagePath << ": " << e.what() << '\n';
         }
     }
 
-    cv::Mat generateQRCode(const std::string& text, const cv::Size& imgSize) {
+    auto generateQRCode(const std::string& text, const cv::Size& imgSize) -> cv::Mat {
         QRcode* qrcode = QRcode_encodeString(text.c_str(), 0, QR_ECLEVEL_H, QR_MODE_8, 1);
-        if (!qrcode) throw std::runtime_error("QR code generation failed");
+        if (qrcode == nullptr) { throw std::runtime_error("QR code generation failed"); }
 
         const int baseSize = qrcode->width;
         const int border = 4;
@@ -98,16 +106,16 @@ private:
         int finalSize = static_cast<int>(sqrt(maxQRArea));
         finalSize = std::max(finalSize, MIN_QR_SIZE);
 
-        cv::Mat qr = createRoundedQR(qrcode, baseSize, border, moduleSize);
-        cv::resize(qr, qr, cv::Size(finalSize, finalSize), 0, 0, cv::INTER_CUBIC);
+        cv::Mat qr_code = createRoundedQR(qrcode, baseSize, border, moduleSize);
+        cv::resize(qr_code, qr_code, cv::Size(finalSize, finalSize), 0, 0, cv::INTER_CUBIC);
 
         QRcode_free(qrcode);
-        return qr;
+        return qr_code;
     }
 
-    cv::Mat createRoundedQR(QRcode* qrcode, int size, int border, int moduleSize) {
-        const int totalSize = size * moduleSize + border * 2;
-        cv::Mat qr(totalSize, totalSize, CV_8UC3, BG_COLOR);
+    auto createRoundedQR(QRcode* qrcode, int size, int border, int moduleSize) -> cv::Mat {
+        const int totalSize = (size * moduleSize) + (border * 2);
+        cv::Mat qr_code(totalSize, totalSize, CV_8UC3, BG_COLOR);
         const int centerOffset = moduleSize / 2;
 
         for (int y = 0; y < size; ++y) {
@@ -117,11 +125,11 @@ private:
                         border + x * moduleSize + centerOffset,
                         border + y * moduleSize + centerOffset
                     );
-                    cv::circle(qr, center, moduleSize/2, QR_COLOR, -1, cv::LINE_AA);
+                    cv::circle(qr_code, center, moduleSize/2, QR_COLOR, -1, cv::LINE_AA);
                 }
             }
         }
-        return qr;
+        return qr_code;
     }
 
     void overlayQRCode(cv::Mat& mainImage, const cv::Mat& qrCode) {
@@ -147,7 +155,14 @@ auto main(int argc, char** argv) -> int {
     size_t threadCount = (argc > 2) ? std::stoul(argv[2]) : 4;
 
     try {
-        processor.process(argv[1], threadCount);
+
+        // для безопасного передачи аргументов
+        auto path = std::span(argv, size_t(1));
+        std::string path_to_photo = path[1];
+        std::cout << path_to_photo << '\n';
+        processor.process(path_to_photo, threadCount);
+
+
         std::cout << "Processing completed successfully!" << '\n';
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << '\n';
