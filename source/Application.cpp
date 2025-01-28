@@ -108,6 +108,38 @@ PrintUsage ( ){
 /*    }*/
 /*}*/
 
+/*void Application::Run() {*/
+/*    QRImageProcessor qr_image_processor;*/
+/**/
+/*    if (argc_ == 4) {*/
+/*        ProcessUserRequest();*/
+/*    } else {*/
+/*        static FileCopying file_copy(*/
+/*            FromSourceTag{}, "./resource/",*/
+/*            ToDestinationTag{}, "./resource/to/"*/
+/*        );*/
+/**/
+/*        const int wait_second = 5;*/
+/*        static FileWatcher watcher(file_copy, wait_second); // Делаем статическим*/
+/**/
+/*        // Запускаем отслеживание в отдельном потоке*/
+/*        std::thread watcher_thread([]() {*/
+/*            watcher.Start(); // Бесконечный цикл внутри*/
+/*        });*/
+/**/
+/*        // Обрабатываем существующие файлы*/
+/*        qr_image_processor.Process("./resource/to");*/
+/**/
+/*        // Оставляем основной поток активным*/
+/*        while (true) {*/
+/*            std::this_thread::sleep_for(std::chrono::seconds(1));*/
+/*        }*/
+/**/
+/*        watcher_thread.join(); // Необязательно, но для корректного завершения*/
+/*    }*/
+/*}*/
+
+
 void Application::Run() {
     QRImageProcessor qr_image_processor;
 
@@ -120,14 +152,14 @@ void Application::Run() {
         );
 
         const int wait_second = 5;
-        static FileWatcher watcher(file_copy, wait_second); // Делаем статическим
+        static FileWatcher watcher(file_copy, wait_second); 
 
         // Запускаем отслеживание в отдельном потоке
         std::thread watcher_thread([]() {
             watcher.Start(); // Бесконечный цикл внутри
         });
 
-        // Обрабатываем существующие файлы
+        // Обрабатываем существующие файлы (НАКЛАДЫВАЕМ QR)
         qr_image_processor.Process("./resource/to");
 
         // Оставляем основной поток активным
@@ -135,6 +167,6 @@ void Application::Run() {
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 
-        watcher_thread.join(); // Необязательно, но для корректного завершения
+        watcher_thread.join(); 
     }
 }
