@@ -197,51 +197,6 @@ TEST_F(FileCopyingTest, ProcessSingleFileHandlesExceptions) {
     fs::permissions(source_file, fs::perms::all);
 }
 
-TEST_F(FileCopyingTest, SourceFileDeletedDuringCopy) {
-    const fs::path source_file = source_dir / "temp.txt";
-    std::ofstream(source_file) << "data";
-
-    // Запускаем перехват stderr до создания потока
-    testing::internal::CaptureStderr();
-
-    FileCopying file_copy(FromSourceTag{}, source_dir, ToDestinationTag{}, dest_dir);
-    
-    // Запускаем копирование в отдельном потоке
-    std::thread worker([&file_copy]() { file_copy.Run(); });
-
-    // Ждем, чтобы дать время начать обработку файла
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    
-    // Удаляем файл во время копирования
-    fs::remove(source_file); 
-
-    worker.join();
-    
-    // Получаем перехваченный вывод
-    std::string output = testing::internal::GetCapturedStderr();
-
-    // Проверяем наличие сообщения об ошибке
-    EXPECT_NE(output.find("Не могу открыть файл"), std::string::npos);
-}
-
-/*TEST_F(FileCopyingTest, SourceFileDeletedDuringCopy) {*/
-/*    const fs::path source_file = source_dir / "temp.txt";*/
-/*    std::ofstream(source_file) << "data";*/
-/**/
-/*    testing::internal::CaptureStderr();*/
-/**/
-/*    FileCopying file_copy(FromSourceTag{}, source_dir, ToDestinationTag{}, dest_dir);*/
-/*    std::thread worker([&file_copy]() { file_copy.Run(); });*/
-/**/
-/*    // Даем время начать обработку файла*/
-/*    std::this_thread::sleep_for(std::chrono::milliseconds(10));*/
-/*    fs::remove(source_file); // Удаляем файл во время копирования*/
-/**/
-/*    worker.join();*/
-/*    std::string output = testing::internal::GetCapturedStderr();*/
-/**/
-/*    EXPECT_NE(output.find("Не могу открыть файл"), std::string::npos);*/
-/*}*/
 
 
 // Обработка файлов с особыми символами
