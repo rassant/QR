@@ -1,4 +1,5 @@
 #pragma once
+#include "FileCopying.hpp"
 
 class FileCopying; 
 
@@ -8,7 +9,7 @@ public:
     void Start();
 
 private:
-    FileCopying& file_copying_;
+    FileCopying  file_copying_;
     unsigned int interval_;
 };
 
