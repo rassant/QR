@@ -170,6 +170,8 @@ TEST_F(FileCopyingTest, CalculateCRCThrowsOnUnreadableFile) {
 /*    EXPECT_FALSE(fs::exists(dest_dir / "source.txt"));*/
 /*}*/
 
+
+
 // Отсутствие прав на запись в целевую директорию
 /*TEST_F(FileCopyingTest, CopyFailsDueToPermissionDenied) {*/
 /*    fs::permissions(dest_dir, fs::perms::all & ~fs::perms::others_write);*/
@@ -181,6 +183,8 @@ TEST_F(FileCopyingTest, CalculateCRCThrowsOnUnreadableFile) {
 /**/
 /*    fs::permissions(dest_dir, fs::perms::all);*/
 /*}*/
+/**/
+
 
 // Обработка исключений в ProcessSingleFile:
 TEST_F(FileCopyingTest, ProcessSingleFileHandlesExceptions) {
