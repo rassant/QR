@@ -66,21 +66,34 @@ ProcessFiles() {
     }
     /*std::cout << "Следующее копирование файлов через "<< wait_second_<< " секунд."<< '\n';*/
 }
-
-
 void FileCopying::
 ProcessSingleFile(const fs::path& source) const {
     const uint32_t source_crc = CalculateCRC(source);
     
+    const fs::path dest_path = GetAvailablePath(source); // Всегда генерируем доступный путь
+    
+    // Проверяем, есть ли в кэше CRC нового файла (после генерации имени)
     if (target_crc_cache_.contains(source_crc)) {
-        /*std::cerr << "Файл уже существует: " << source.filename() << std::endl;*/
-        return;
+        return; // Файл с таким CRC уже существует
     }
 
-    const fs::path dest_path = GetAvailablePath(source);
     CopyWithRetries(source, dest_path);
     std::cout << "Успешно скопирован: " << dest_path.filename() << '\n';
 }
+
+/*void FileCopying::*/
+/*ProcessSingleFile(const fs::path& source) const {*/
+/*    const uint32_t source_crc = CalculateCRC(source);*/
+/**/
+/*    if (target_crc_cache_.contains(source_crc)) {*/
+/*        /*std::cerr << "Файл уже существует: " << source.filename() << std::endl;*/
+/*        return;*/
+/*    }*/
+/**/
+/*    const fs::path dest_path = GetAvailablePath(source);*/
+/*    CopyWithRetries(source, dest_path);*/
+/*    std::cout << "Успешно скопирован: " << dest_path.filename() << '\n';*/
+/*}*/
 
 
 auto FileCopying::

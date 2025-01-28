@@ -8,7 +8,7 @@ struct ToDestinationTag {}; // Тег для целевого пути
 
 class FileCopying 
 {
-private:
+public:
 	std::filesystem::path from_source_;      // откуда копировать 
 	std::filesystem::path to_destination_;   // куда копировать
 			  /*int wait_second_;*/
