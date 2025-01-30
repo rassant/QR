@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB
 
-CXX_INCLUDES = -I/home/idis/code/Rashid/QR_CODE_v1/D:/GitHub/vcpkg/installed/x64-windows/include -I/home/idis/code/Rashid/QR_CODE_v1/D:/GitHub/vcpkg/installed/x64-windows/include/opencv2 -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -I/usr/include/opencv4 -I/usr/include/opencv2 -isystem /usr/local/include/opencv4
 
 CXX_FLAGS =  -O2 -Wall -std=gnu++20
 
