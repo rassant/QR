@@ -1,3 +1,0 @@
-/home/idis/code/Rashid/QR_CODE_v1/build/CMakeFiles/MyApplication.dir
-/home/idis/code/Rashid/QR_CODE_v1/build/CMakeFiles/edit_cache.dir
-/home/idis/code/Rashid/QR_CODE_v1/build/CMakeFiles/rebuild_cache.dir
