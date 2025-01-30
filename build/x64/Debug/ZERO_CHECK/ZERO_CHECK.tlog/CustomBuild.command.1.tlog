@@ -1,0 +1,10 @@
+^D:\CODE\_PARK_\QR\BUILD\CMAKEFILES\527BEBCAA9B24B2471D5EAFD61B580B4\GENERATE.STAMP.RULE
+setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/code/_park_/QR -BD:/code/_park_/QR/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/code/_park_/QR/build/MyApplication.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

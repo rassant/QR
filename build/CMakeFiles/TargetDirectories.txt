@@ -1,0 +1,3 @@
+D:/code/_park_/QR/build/CMakeFiles/MyApplication.dir
+D:/code/_park_/QR/build/CMakeFiles/ALL_BUILD.dir
+D:/code/_park_/QR/build/CMakeFiles/ZERO_CHECK.dir

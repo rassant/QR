@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall")
 
+# Указываем, что хотим использовать статические библиотеки
+set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_FIND_LIBRARY_SUFFIXES .lib .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
+
 # Укажите путь к вашим исходным файлам
 set(SOURCES
     main.cpp
@@ -21,12 +25,12 @@ if(WIN32)
     set(CMAKE_TOOLCHAIN_FILE "D:/GitHub/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
     
     # Указываем путь к установленным библиотекам через vcpkg
-    set(CMAKE_PREFIX_PATH "D:/GitHub/vcpkg/installed/x64-windows" ${CMAKE_PREFIX_PATH})
+    set(CMAKE_PREFIX_PATH "D:/GitHub/vcpkg/installed/x64-windows-static" ${CMAKE_PREFIX_PATH})
     
     # Включаем директории с заголовочными файлами
     include_directories(
-        "D:/GitHub/vcpkg/installed/x64-windows/include"
-        "D:/GitHub/vcpkg/installed/x64-windows/include/opencv2"
+        "D:/GitHub/vcpkg/installed/x64-windows-static/include"
+        "D:/GitHub/vcpkg/installed/x64-windows-static/include/opencv2"
     )
 else()
     message(STATUS "Configuring for Linux")
@@ -59,8 +63,8 @@ endif()
 # Линковка libqrencode
 if(WIN32)
     # На Windows ищем libqrencode вручную, если find_package не работает
-    find_path(QRENCODE_INCLUDE_DIR NAMES qrencode.h PATHS "D:/GitHub/vcpkg/installed/x64-windows/include")
-    find_library(QRENCODE_LIBRARY NAMES qrencode PATHS "D:/GitHub/vcpkg/installed/x64-windows/lib")
+    find_path(QRENCODE_INCLUDE_DIR NAMES qrencode.h PATHS "D:/GitHub/vcpkg/installed/x64-windows-static/include")
+    find_library(QRENCODE_LIBRARY NAMES qrencode PATHS "D:/GitHub/vcpkg/installed/x64-windows-static/lib")
 
     if(QRENCODE_INCLUDE_DIR AND QRENCODE_LIBRARY)
         message(STATUS "Found qrencode: ${QRENCODE_LIBRARY}")
@@ -89,3 +93,6 @@ if (exiv2_FOUND)
 else()
     message(FATAL_ERROR "[| exiv2 |] not found!")
 endif()
+
+
+

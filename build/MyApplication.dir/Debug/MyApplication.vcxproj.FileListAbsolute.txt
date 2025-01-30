@@ -1,0 +1,2 @@
+D:\code\_park_\QR\build\Debug\qrencode.dll
+D:\code\_park_\QR\build\MyApplication.dir\Debug\MyApplic.BE8B2DE0.Up2Date
