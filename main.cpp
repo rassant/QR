@@ -1,4 +1,5 @@
-
+// g++ -std=c++20 -O2 -Wall main.cpp ./source/Application.cpp ./source/FileCopying.cpp ./source/FileWatcher.cpp ./source/QRImageProcessor.cpp -lqrencode -lboost_system -lboost_filesystem -lexiv2 -I"D:\GitHub\vcpkg\installed\x64-windows\include" -I"D:\GitHub\vcpkg\installed\x64-windows\include\opencv2"
+//------------------------
 /*g++ -ggdb main.cpp ./FileCopying.cpp ./FileWatcher.cpp -std=c++20 -lboost_system -lboost_filesystem -lexiv2 && ./a.out*/
 
 //g++ -std=c++20 -O2 -Wall main.cpp ./source/* $(pkg-config --cflags --libs opencv4) -lqrencode -lboost_system -lboost_filesystem -lexiv2  && ./a.out

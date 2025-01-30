@@ -1,6 +1,7 @@
 #include "../header/FileWatcher.hpp"
 #include "../header/FileCopying.hpp"
 #include <thread>
+#include <iostream>
 
 FileWatcher::FileWatcher(FileCopying& file_copying, unsigned int interval_seconds)
     : file_copying_(file_copying), interval_(interval_seconds) {}
