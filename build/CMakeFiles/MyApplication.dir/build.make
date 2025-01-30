@@ -191,6 +191,7 @@ MyApplication: /usr/local/lib/libopencv_xobjdetect.so.4.10.0
 MyApplication: /usr/local/lib/libopencv_xphoto.so.4.10.0
 MyApplication: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0
 MyApplication: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.83.0
+MyApplication: /usr/local/lib/libexiv2.so.1.00.0.9
 MyApplication: /usr/local/lib/libopencv_shape.so.4.10.0
 MyApplication: /usr/local/lib/libopencv_highgui.so.4.10.0
 MyApplication: /usr/local/lib/libopencv_datasets.so.4.10.0
