@@ -16,6 +16,7 @@ set(SOURCES
     source/FileCopying.cpp
     source/FileWatcher.cpp
     source/QRImageProcessor.cpp
+    source/InputData.cpp
 )
 
 # Определяем платформу

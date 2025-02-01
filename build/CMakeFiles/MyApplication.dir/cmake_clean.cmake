@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MyApplication.dir/source/FileCopying.cpp.o.d"
   "CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.o"
   "CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.o.d"
+  "CMakeFiles/MyApplication.dir/source/InputData.cpp.o"
+  "CMakeFiles/MyApplication.dir/source/InputData.cpp.o.d"
   "CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.o"
   "CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.o.d"
   "MyApplication"

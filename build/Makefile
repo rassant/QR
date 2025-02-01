@@ -225,6 +225,30 @@ source/FileWatcher.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.s
 .PHONY : source/FileWatcher.cpp.s
 
+source/InputData.o: source/InputData.cpp.o
+.PHONY : source/InputData.o
+
+# target to build an object file
+source/InputData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/InputData.cpp.o
+.PHONY : source/InputData.cpp.o
+
+source/InputData.i: source/InputData.cpp.i
+.PHONY : source/InputData.i
+
+# target to preprocess a source file
+source/InputData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/InputData.cpp.i
+.PHONY : source/InputData.cpp.i
+
+source/InputData.s: source/InputData.cpp.s
+.PHONY : source/InputData.s
+
+# target to generate assembly for a file
+source/InputData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/InputData.cpp.s
+.PHONY : source/InputData.cpp.s
+
 source/QRImageProcessor.o: source/QRImageProcessor.cpp.o
 .PHONY : source/QRImageProcessor.o
 
@@ -270,6 +294,9 @@ help:
 	@echo "... source/FileWatcher.o"
 	@echo "... source/FileWatcher.i"
 	@echo "... source/FileWatcher.s"
+	@echo "... source/InputData.o"
+	@echo "... source/InputData.i"
+	@echo "... source/InputData.s"
 	@echo "... source/QRImageProcessor.o"
 	@echo "... source/QRImageProcessor.i"
 	@echo "... source/QRImageProcessor.s"

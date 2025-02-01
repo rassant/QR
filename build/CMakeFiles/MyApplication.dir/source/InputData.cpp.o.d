@@ -1,7 +1,7 @@
-CMakeFiles/MyApplication.dir/main.cpp.o: \
- /home/idis/code/Rashid/QR/main.cpp /usr/include/stdc-predef.h \
- /usr/include/nlohmann/json.hpp /usr/include/c++/13/algorithm \
- /usr/include/c++/13/bits/stl_algobase.h \
+CMakeFiles/MyApplication.dir/source/InputData.cpp.o: \
+ /home/idis/code/Rashid/QR/source/InputData.cpp \
+ /usr/include/stdc-predef.h /usr/include/nlohmann/json.hpp \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -327,10 +327,5 @@ CMakeFiles/MyApplication.dir/main.cpp.o: \
  /usr/include/nlohmann/ordered_map.hpp /usr/include/c++/13/any \
  /usr/include/nlohmann/detail/macro_unscope.hpp \
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
- /usr/include/c++/13/iostream \
- /home/idis/code/Rashid/QR/./header/Application.hpp \
- /home/idis/code/Rashid/QR/./header/InputData.hpp \
- /usr/include/c++/13/fstream \
- /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc
+ /home/idis/code/Rashid/QR/source/../header/InputData.hpp \
+ /usr/include/c++/13/iostream
