@@ -1,0 +1,30 @@
+{
+    "Photographers": {
+        "Masha":[
+            "./photos_from_camera/Masha_1/",
+            "./photos_from_camera/Masha_2/", 
+            "./photos_from_camera/Masha_3/"
+        ], 
+        "Anna Smolenskaya": [
+            "./photos_from_camera/AnnaSmolenskya_1/", 
+            "./photos_from_camera/AnnaSmolenskya_2/", 
+            "./photos_from_camera/AnnaSmolenskya_3/"
+        ], 
+        "Anna Zadorozhnaya":[
+            "./photos_from_camera/AnnaZadoroznaya_1/", 
+            "./photos_from_camera/AnnaZadoroznaya_2/", 
+            "./photos_from_camera/AnnaZadoroznaya_3/"
+        ]
+    },
+
+    "Folders": [
+        { "Archive":    "./data/Archive"   } , 
+        { "Server":     "./data/Server"    } , 
+        { "QRcode":     "./data/QRcode"    } , 
+        { "Photoshop":  "./data/Photoshop" } 
+    ],
+    "Server":{
+        "name": "http://some.com",
+        "port": 22
+    }
+}
