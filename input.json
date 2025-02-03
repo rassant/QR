@@ -20,9 +20,9 @@
     "Folders": {
          "Archive":   "./Resource/Archive",
          "TempWork":  "./Resource/TempWork",
-         "Server":    "./Resource/Photoshop",
+         "Server":    "./Resource/Server",
          "QRCode":    "./Resource/QRCode",
-         "Photoshop": "./Resource/Server"
+         "Photoshop": "./Resource/Photoshop"
     },
     "Server": {
         "Name": "http://some.com",

@@ -1,5 +1,6 @@
 #include "../header/FileCopyManager.hpp"
 #include "../header/FileCopying.hpp"
+#include <filesystem>
 #include <format>
 
 FileCopyManager::FileCopyManager ( PhotographerCollection path_to_flash 
@@ -23,9 +24,6 @@ void FileCopyManager::CopyFromFlash ()
 {
     for (const auto & [name,paths] : paths_flash_.GetData())
     {
-        if (paths.empty()) 
-        { continue; }
-
         std::filesystem::path folder_name_photograph = path_save_.GetTempWork()/  name;
         if ( !std::filesystem::exists(folder_name_photograph)) // папка не существует
         {
@@ -44,7 +42,20 @@ void FileCopyManager::CopyFromFlash ()
             {
                 continue;
             }
+            // 
             FileCopying(FromSourceTag{}, path, ToDestinationTag{}, folder_name_photograph).Run();
+            const auto path_for_server = path_save_.GetServer();
+            if (!std::filesystem::exists(path_for_server))
+            {
+                try {
+                    std::filesystem::create_directories(path_for_server);
+                }
+                catch (const std::filesystem::filesystem_error& e)
+                {
+                    std::cerr << "Ошибка при создании директории фотографа: " << e.what() << '\n';
+                }
+            }
+            FileCopying(FromSourceTag{}, path, ToDestinationTag{}, path_for_server).Run();
         }
     }
 }
