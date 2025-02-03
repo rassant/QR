@@ -400,5 +400,6 @@ CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o: \
  /usr/local/include/exiv2/xmp_exiv2.hpp \
  /usr/local/include/exiv2/xmpsidecar.hpp \
  /usr/include/c++/13/unordered_set \
- /usr/include/c++/13/bits/unordered_set.h /usr/include/c++/13/format \
+ /usr/include/c++/13/bits/unordered_set.h /usr/include/c++/13/chrono \
+ /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/format \
  /usr/include/c++/13/charconv /usr/include/c++/13/variant

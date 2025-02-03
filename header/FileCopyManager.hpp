@@ -21,6 +21,9 @@ private:
     PhotographerCollection paths_flash_; // пути откуда копируем
     WorkDirectoryManager   path_save_;   // пути куда копируем
 
+static void MakeDirectoryIfNotExists(const std::filesystem::path & path_to_folder);
+static auto MakeDataDirectoryIfNotExists(const std::filesystem::path & path_to_folder) -> std::filesystem::path;
+
     static auto IsDirectoryEmpty(const std::filesystem::path& dir) -> bool;
     void CopyFromFlash ();
     void Copy ();
