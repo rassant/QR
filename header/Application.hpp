@@ -1,23 +1,26 @@
 #pragma once
+#include <memory>
 #include <string>
-#include <vector>
+#include "./InputData.hpp"
 
 
 class Application 
 {
 private:
-	int argc_;
-	std::vector<std::string> argv_;
+	std::string json_path_;
+	int threads_;
+	std::shared_ptr<ApplicationData> app_data_;
 
-	std::string from_source_;
-	std::string to_destination_;
-	unsigned int second_wait_{};
+	static void CopyPhotographerFlash (const std::shared_ptr<PhotographerCollection> & flash_paths);
 
 public:
-	Application(int argc,  char ** argv);
+	explicit Application(const std::string & json_path);
+	Application (int, char **);
 
-	void ParseArguments ( ); 
-	void ProcessUserRequest ( );
+	/*void ParseArguments ( ); */
+	/*void ProcessUserRequest ( );*/
 	void Run ( ) ;
 	static void PrintUsage ( );
 };
+
+

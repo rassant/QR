@@ -1,25 +1,30 @@
 #pragma once
+#include <filesystem>
 #include <nlohmann/json.hpp>
+#include <fstream>
 #include <iostream>
+#include <stdexcept>
 
 using json = nlohmann::json;
 
 
 // ------------------------------------------------------------------------ PHOTOGRAPHERS ------
-class Photographers 
+class PhotographerCollection 
 {
 private:
-    std::unordered_map<std::string,std::vector<std::string>> photographers_;
+    std::unordered_map<std::string,std::vector<std::filesystem::path>> photographers_;
 public:
-    explicit Photographers (const json & input);
+    PhotographerCollection () = delete;
+    explicit PhotographerCollection (const json & input);
     void Show () const;
-    [[nodiscard]] auto GetPaths (const std::string & name) -> std::vector<std::string>;
+    /*[[nodiscard]] auto GetPaths (const std::string & name) -> std::vector<std::string>;*/
+    [[nodiscard]] auto GetData  ( ) const -> std::unordered_map<std::string,std::vector<std::filesystem::path>> {return photographers_;}
 };
 
 
 
 // ------------------------------------------------------------------------ WORKfOLDERS -------- 
-class WorkFolders 
+class WorkDirectoryManager 
 {
 private:
     std::filesystem::path archive_;
@@ -27,8 +32,8 @@ private:
     std::filesystem::path qr_code_;
     std::filesystem::path photoshop_;
 public:
-    WorkFolders() = delete;
-    explicit WorkFolders (const json & input);
+    WorkDirectoryManager() = delete;
+    explicit WorkDirectoryManager (const json & input);
 
     [[nodiscard]] auto GetArchive   () const -> std::filesystem::path { return archive_;  };
     [[nodiscard]] auto GetServer    () const -> std::filesystem::path { return server_;   };
@@ -41,13 +46,32 @@ public:
 
 
 // ------------------------------------------------------------------------ SERVER ----------- 
-class Server 
+class ServerConfig 
 {
 private:
     int port_;
     std::string name_;
 public:
-    Server () = delete;
-    explicit Server (const json & input);
+    ServerConfig () = delete;
+    explicit ServerConfig (const json & input);
     void Show () const;
 };
+
+
+
+// ------------------------------------------------------------------------ DATA ----------- 
+class ApplicationData {
+private:
+        std::shared_ptr<PhotographerCollection> photographers_;
+	std::shared_ptr<WorkDirectoryManager>   work_dirs_;
+	std::shared_ptr<ServerConfig>           server_;
+
+public:
+	ApplicationData () = delete;
+        explicit ApplicationData(const std::filesystem::path &input);
+
+        auto GetPhotographer () -> std::shared_ptr<PhotographerCollection> { return photographers_ ;}
+	auto GetWorkDir      () -> std::shared_ptr<WorkDirectoryManager>   { return work_dirs_ ;}
+	auto GetServerConfig () -> std::shared_ptr<ServerConfig>           { return server_ ;}
+};
+

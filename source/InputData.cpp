@@ -1,13 +1,16 @@
+#include <filesystem>
 #include <nlohmann/json.hpp>
 #include "../header/InputData.hpp"
 #include <iostream>
+#include <memory>
+#include <fstream>
 
 using json = nlohmann::json;
 
 
 // ------------------------------------------------------------------------ PHOTOGRAPHERS ------
-Photographers::
-Photographers (const json & input) 
+PhotographerCollection::
+PhotographerCollection (const json & input) 
 {
 	for (const auto & name : input.at("Photographers").items() )
 	{
@@ -19,7 +22,7 @@ Photographers (const json & input)
 }
 
 
-void Photographers::
+void PhotographerCollection::
 Show () const
 {
 	for (const auto &[name, paths]: photographers_)
@@ -34,16 +37,16 @@ Show () const
 }
 
 
-auto Photographers::
-GetPaths (const std::string & name) -> std::vector<std::string>
-{
-	return photographers_.at(name);	
-}
+/*auto PhotographerCollection::*/
+/*GetPaths (const std::string & name) -> std::vector<std::filesystem::path>*/
+/*{*/
+/*	return photographers_.at(name);	*/
+/*}*/
 
 
 
 // ------------------------------------------------------------------------ WORKfOLDERS -------- 
-WorkFolders::WorkFolders (const json & input)
+WorkDirectoryManager::WorkDirectoryManager (const json & input)
 {
     for (const auto &folder : input.at("Folders").items() )
     {
@@ -56,7 +59,7 @@ WorkFolders::WorkFolders (const json & input)
 
 
 
-void WorkFolders::
+void WorkDirectoryManager::
 Show () const{
 	std::cout << "Archive"  << archive_   << '\n';
 	std::cout << "Server"   << server_    << '\n';
@@ -67,7 +70,7 @@ Show () const{
 
 
 // ------------------------------------------------------------------------ SERVER ----------- 
-Server::Server (const json & input)
+ServerConfig::ServerConfig (const json & input)
 {
 	for (const auto &server: input.at("Server").items() )
 	{
@@ -77,8 +80,24 @@ Server::Server (const json & input)
 }
 
 
-void Server::Show () const
+void ServerConfig::Show () const
 {
 	std::cout << "Name: " << name_ << '\n';
 	std::cout << "Port: " << port_ << '\n';
 }
+
+
+ApplicationData::ApplicationData (const std::filesystem::path & input)
+{
+    json data;
+    std::ifstream file(input);
+    if (!file.is_open()) {
+        throw std::runtime_error("Failed to open input file");
+    }
+    file >> data;
+
+    photographers_ = std::make_shared<PhotographerCollection> (data);
+	work_dirs_     = std::make_shared<WorkDirectoryManager>   (data);
+	server_        = std::make_shared<ServerConfig>           (data);
+}
+

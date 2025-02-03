@@ -6,27 +6,17 @@
 
 
 #include <nlohmann/json.hpp>
-#include <iostream>
 #include "./header/Application.hpp"
-#include "./header/InputData.hpp"
-#include <fstream>
+#include <iostream>
 
 using namespace std;
 using json = nlohmann::json;
 
 
 auto main(int argc, char** argv) -> int {
-
-    std::ifstream input_json ("./input.json");
-    json input;
-    input_json >> input;
-
-    Photographers photographers (input);
-    photographers.Show();
-
-
  try {
-        Application app(argc, argv);
+        /*Application app(argc, argv);*/
+        Application app("./input.json");
         Application::PrintUsage();
         app.Run();
     } 
