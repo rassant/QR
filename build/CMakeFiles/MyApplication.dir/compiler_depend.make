@@ -850,6 +850,7 @@ CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o: /home/idis/code/Rashi
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
   /usr/include/c++/13/bits/chrono.h \
+  /usr/include/c++/13/bits/chrono_io.h \
   /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
@@ -981,6 +982,7 @@ CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o: /home/idis/code/Rashi
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/charconv \
+  /usr/include/c++/13/chrono \
   /usr/include/c++/13/climits \
   /usr/include/c++/13/clocale \
   /usr/include/c++/13/cmath \
@@ -4302,6 +4304,10 @@ CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.o: /home/idis/code/Rash
 
 /home/idis/code/Rashid/QR/header/Application.hpp:
 
+/usr/include/opencv4/opencv2/dnn/dict.hpp:
+
+/usr/include/c++/13/bits/chrono_io.h:
+
 /usr/include/c++/13/bits/deque.tcc:
 
 /usr/include/c++/13/bits/regex.tcc:
@@ -4495,9 +4501,5 @@ CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.o: /home/idis/code/Rash
 /home/idis/code/Rashid/QR/source/InputData.cpp:
 
 /home/idis/code/Rashid/QR/header/QRImageProcessor.hpp:
-
-/usr/include/opencv4/opencv2/dnn/dict.hpp:
-
-/usr/include/c++/13/bits/chrono_io.h:
 
 /usr/include/c++/13/bits/stl_queue.h:

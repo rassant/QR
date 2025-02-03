@@ -62,7 +62,9 @@ void FileCopyManager::CopyFromFlash ()
             // копируем в папку архив
             // добавить создание папки с сегодняшней датой
             std::filesystem::path date_folder_name = MakeDataDirectoryIfNotExists(path_for_archiv);
-            FileCopying(FromSourceTag{}, path, ToDestinationTag{}, date_folder_name).Run();
+            auto copy_to_archiv = FileCopying(FromSourceTag{}, path, ToDestinationTag{}, date_folder_name);
+            copy_to_archiv.Run();
+            copy_to_archiv.DeleteCopingFiles();
         }
     }
 }

@@ -31,10 +31,21 @@ ValidateDirectories() const {
 }
 
 
-void FileCopying::
-Run() {
-    BuildCRCCache(); // Обновляем кэш перед каждым запуском так как у нас добавляются файлы в папку постоянно
-    ProcessFiles();
+auto
+ FileCopying::Run() -> std::unordered_set<std::filesystem::path> {
+    BuildCRCCache();
+    
+    for (const auto& entry : fs::directory_iterator(from_source_)) {
+        if (entry.is_regular_file()) {
+            try {
+                ProcessSingleFile(entry.path());  // Передаем список для заполнения
+            } catch (const std::exception& e) {
+                std::cerr << "Error processing " << entry.path() << ": " << e.what() << '\n';
+            }
+        }
+    }
+    
+    return copied_files_;
 }
 
 
@@ -66,34 +77,19 @@ ProcessFiles() {
     }
     /*std::cout << "Следующее копирование файлов через "<< wait_second_<< " секунд."<< '\n';*/
 }
-void FileCopying::
-ProcessSingleFile(const fs::path& source) const {
+
+void FileCopying::ProcessSingleFile(const fs::path& source) {
     const uint32_t source_crc = CalculateCRC(source);
-    
-    const fs::path dest_path = GetAvailablePath(source); // Всегда генерируем доступный путь
-    
-    // Проверяем, есть ли в кэше CRC нового файла (после генерации имени)
+    const fs::path dest_path = GetAvailablePath(source);
+
     if (target_crc_cache_.contains(source_crc)) {
-        return; // Файл с таким CRC уже существует
+        return;  // Файл с таким CRC уже существует
     }
 
     CopyWithRetries(source, dest_path);
-    std::cout << "Успешно скопирован: " << dest_path.filename() << '\n';
+    copied_files_.insert(source);  // Добавляем исходный путь в список
 }
 
-/*void FileCopying::*/
-/*ProcessSingleFile(const fs::path& source) const {*/
-/*    const uint32_t source_crc = CalculateCRC(source);*/
-/**/
-/*    if (target_crc_cache_.contains(source_crc)) {*/
-/*        /*std::cerr << "Файл уже существует: " << source.filename() << std::endl;*/
-/*        return;*/
-/*    }*/
-/**/
-/*    const fs::path dest_path = GetAvailablePath(source);*/
-/*    CopyWithRetries(source, dest_path);*/
-/*    std::cout << "Успешно скопирован: " << dest_path.filename() << '\n';*/
-/*}*/
 
 
 auto FileCopying::
@@ -169,3 +165,19 @@ VerifyChecksum( uint32_t source_crc, const fs::path& destination) -> bool {
     return source_crc == CalculateCRC( destination);
 }
 
+
+
+
+void FileCopying::
+DeleteCopingFiles ()
+{
+    for (const auto& path : copied_files_)
+    {
+        if (fs::exists(path))
+        {
+            std::filesystem::remove(path); 
+        }
+    }
+
+    copied_files_.clear();
+}
