@@ -6,7 +6,9 @@
 
 
 #include <nlohmann/json.hpp>
-#include "./header/Application.hpp"
+/*#include "./header/Application.hpp"*/
+#include "./header/FileCopyManager.hpp"
+#include "./header/InputData.hpp"
 #include <iostream>
 
 using namespace std;
@@ -14,17 +16,20 @@ using json = nlohmann::json;
 
 
 auto main(int argc, char** argv) -> int {
- try {
+    ApplicationData input ("./input.json");
+    FileCopyManager copy (*input.GetPhotographer(), *input.GetWorkDir());
+
+ /*try {*/
         /*Application app(argc, argv);*/
-        Application app("./input.json");
-        Application::PrintUsage();
-        app.Run();
-    } 
-    catch (const std::exception& e) {
-        std::cerr << "Ошибка в работе программы: " << e.what() << "\n";
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
+    /*    Application app("./input.json");*/
+    /*    Application::PrintUsage();*/
+    /*    app.Run();*/
+    /*} */
+    /*catch (const std::exception& e) {*/
+    /*    std::cerr << "Ошибка в работе программы: " << e.what() << "\n";*/
+    /*    return EXIT_FAILURE;*/
+    /*}*/
+    /*return EXIT_SUCCESS;*/
 }
 
 

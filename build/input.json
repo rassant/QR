@@ -19,6 +19,7 @@
 
     "Folders": {
          "Archive":   "./Resource/Archive",
+         "TempWork":  "./Resource/TempWork",
          "Server":    "./Resource/Photoshop",
          "QRCode":    "./Resource/QRCode",
          "Photoshop": "./Resource/Server"

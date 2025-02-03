@@ -6,5 +6,5 @@ CXX_DEFINES = -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_D
 
 CXX_INCLUDES = -I/usr/include/opencv4 -isystem /usr/local/include/opencv4
 
-CXX_FLAGS =  -O2 -Wall -std=gnu++20
+CXX_FLAGS =  -ggdb -O2 -Wall -std=gnu++20
 

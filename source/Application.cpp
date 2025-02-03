@@ -75,13 +75,13 @@ CopyPhotographerFlash (const std::shared_ptr<PhotographerCollection> & flash_pat
    /* проверяем что скопировались все файлы.*/
    /* Удаляем с флешки фото.*/
    /* -----------------------------------------------------*/
-bool isDirectoryEmpty(const std::filesystem::path& dir) {
-    if (!std::filesystem::exists(dir) || !std::filesystem::is_directory(dir)) {
-        throw std::runtime_error("Указанный путь не существует или не является директорией");
-    }
-    return std::filesystem::begin(std::filesystem::directory_iterator(dir)) == std::filesystem::end(std::filesystem::directory_iterator());
-}
------------------------------------------------------
+/*bool isDirectoryEmpty(const std::filesystem::path& dir) {*/
+/*    if (!std::filesystem::exists(dir) || !std::filesystem::is_directory(dir)) {*/
+/*        throw std::runtime_error("Указанный путь не существует или не является директорией");*/
+/*    }*/
+/*    return std::filesystem::begin(std::filesystem::directory_iterator(dir)) == std::filesystem::end(std::filesystem::directory_iterator());*/
+/*}*/
+/*-----------------------------------------------------*/
 
     for (const auto &[photograph, paths_to_flash]: flash_paths->GetData())
     {

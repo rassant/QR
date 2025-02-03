@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/idis/code/Rashid/QR/main.cpp" "CMakeFiles/MyApplication.dir/main.cpp.o" "gcc" "CMakeFiles/MyApplication.dir/main.cpp.o.d"
   "/home/idis/code/Rashid/QR/source/Application.cpp" "CMakeFiles/MyApplication.dir/source/Application.cpp.o" "gcc" "CMakeFiles/MyApplication.dir/source/Application.cpp.o.d"
+  "/home/idis/code/Rashid/QR/source/FileCopyManager.cpp" "CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o" "gcc" "CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o.d"
   "/home/idis/code/Rashid/QR/source/FileCopying.cpp" "CMakeFiles/MyApplication.dir/source/FileCopying.cpp.o" "gcc" "CMakeFiles/MyApplication.dir/source/FileCopying.cpp.o.d"
   "/home/idis/code/Rashid/QR/source/FileWatcher.cpp" "CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.o" "gcc" "CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.o.d"
   "/home/idis/code/Rashid/QR/source/InputData.cpp" "CMakeFiles/MyApplication.dir/source/InputData.cpp.o" "gcc" "CMakeFiles/MyApplication.dir/source/InputData.cpp.o.d"

@@ -51,6 +51,7 @@ WorkDirectoryManager::WorkDirectoryManager (const json & input)
     for (const auto &folder : input.at("Folders").items() )
     {
 	if      (folder.key() == "Archive"  ) { archive_   = folder.value().get<std::string>(); }
+	else if (folder.key() == "TempWork" ) { temp_work_ = folder.value().get<std::string>(); }
 	else if (folder.key() == "Server"   ) { server_    = folder.value().get<std::string>(); }
 	else if (folder.key() == "QRCode"   ) { qr_code_   = folder.value().get<std::string>(); }
 	else if (folder.key() == "Photoshop") { photoshop_ = folder.value().get<std::string>(); }
@@ -62,6 +63,7 @@ WorkDirectoryManager::WorkDirectoryManager (const json & input)
 void WorkDirectoryManager::
 Show () const{
 	std::cout << "Archive"  << archive_   << '\n';
+	std::cout << "TempWork" << temp_work_ << '\n';
 	std::cout << "Server"   << server_    << '\n';
 	std::cout << "QRCode"   << qr_code_   << '\n';
 	std::cout << "Photoshop"<< photoshop_ << '\n'; 

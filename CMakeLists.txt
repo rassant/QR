@@ -3,7 +3,7 @@ project(MyApplication)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -O2 -Wall")
 
 # Указываем, что хотим использовать статические библиотеки
 set(BUILD_SHARED_LIBS OFF)
@@ -17,6 +17,7 @@ set(SOURCES
     source/FileWatcher.cpp
     source/QRImageProcessor.cpp
     source/InputData.cpp
+    source/FileCopyManager.cpp
 )
 
 # Определяем платформу

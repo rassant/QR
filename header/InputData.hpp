@@ -28,6 +28,7 @@ class WorkDirectoryManager
 {
 private:
     std::filesystem::path archive_;
+    std::filesystem::path temp_work_;
     std::filesystem::path server_;
     std::filesystem::path qr_code_;
     std::filesystem::path photoshop_;
@@ -36,6 +37,7 @@ public:
     explicit WorkDirectoryManager (const json & input);
 
     [[nodiscard]] auto GetArchive   () const -> std::filesystem::path { return archive_;  };
+    [[nodiscard]] auto GetTempWork  () const -> std::filesystem::path { return temp_work_;  };
     [[nodiscard]] auto GetServer    () const -> std::filesystem::path { return server_;   };
     [[nodiscard]] auto GetQrcode    () const -> std::filesystem::path { return qr_code_;  };
     [[nodiscard]] auto GetPhotoshop () const -> std::filesystem::path { return photoshop_;};

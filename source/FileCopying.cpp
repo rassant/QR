@@ -16,7 +16,7 @@ FileCopying (FromSourceTag /*unused*/,   const std::string & from_source
 	   , ToDestinationTag /*unused*/,const std::string & to_destination) 
     :   from_source_(from_source), to_destination_(to_destination)
 {
-    ValidateDirectories();
+//     ValidateDirectories();
 }
 
 

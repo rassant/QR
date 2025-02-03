@@ -177,6 +177,30 @@ source/Application.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/Application.cpp.s
 .PHONY : source/Application.cpp.s
 
+source/FileCopyManager.o: source/FileCopyManager.cpp.o
+.PHONY : source/FileCopyManager.o
+
+# target to build an object file
+source/FileCopyManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o
+.PHONY : source/FileCopyManager.cpp.o
+
+source/FileCopyManager.i: source/FileCopyManager.cpp.i
+.PHONY : source/FileCopyManager.i
+
+# target to preprocess a source file
+source/FileCopyManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.i
+.PHONY : source/FileCopyManager.cpp.i
+
+source/FileCopyManager.s: source/FileCopyManager.cpp.s
+.PHONY : source/FileCopyManager.s
+
+# target to generate assembly for a file
+source/FileCopyManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.s
+.PHONY : source/FileCopyManager.cpp.s
+
 source/FileCopying.o: source/FileCopying.cpp.o
 .PHONY : source/FileCopying.o
 
@@ -288,6 +312,9 @@ help:
 	@echo "... source/Application.o"
 	@echo "... source/Application.i"
 	@echo "... source/Application.s"
+	@echo "... source/FileCopyManager.o"
+	@echo "... source/FileCopyManager.i"
+	@echo "... source/FileCopyManager.s"
 	@echo "... source/FileCopying.o"
 	@echo "... source/FileCopying.i"
 	@echo "... source/FileCopying.s"

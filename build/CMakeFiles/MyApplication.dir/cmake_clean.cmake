@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MyApplication.dir/main.cpp.o.d"
   "CMakeFiles/MyApplication.dir/source/Application.cpp.o"
   "CMakeFiles/MyApplication.dir/source/Application.cpp.o.d"
+  "CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o"
+  "CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o.d"
   "CMakeFiles/MyApplication.dir/source/FileCopying.cpp.o"
   "CMakeFiles/MyApplication.dir/source/FileCopying.cpp.o.d"
   "CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.o"
