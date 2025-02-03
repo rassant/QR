@@ -42,20 +42,22 @@ void FileCopyManager::CopyFromFlash ()
             {
                 continue;
             }
-            // 
+            // копируем во временные файлы фотографов
             FileCopying(FromSourceTag{}, path, ToDestinationTag{}, folder_name_photograph).Run();
-            const auto path_for_server = path_save_.GetServer();
-            if (!std::filesystem::exists(path_for_server))
+            const auto path_for_archiv = path_save_.GetArchive();
+            if (!std::filesystem::exists(path_for_archiv))
             {
                 try {
-                    std::filesystem::create_directories(path_for_server);
+                    std::filesystem::create_directories(path_for_archiv);
                 }
                 catch (const std::filesystem::filesystem_error& e)
                 {
                     std::cerr << "Ошибка при создании директории фотографа: " << e.what() << '\n';
                 }
             }
-            FileCopying(FromSourceTag{}, path, ToDestinationTag{}, path_for_server).Run();
+            // копируем в папку архив
+            // добавить создание папки с сегодняшней датой
+            FileCopying(FromSourceTag{}, path, ToDestinationTag{}, path_for_archiv).Run();
         }
     }
 }
