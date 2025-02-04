@@ -21,6 +21,15 @@ FileCopying (FromSourceTag /*unused*/,   const std::string & from_source
 
 
 void FileCopying::
+Copying (FromSourceTag /*unused*/,   const std::string & from_source
+	   , ToDestinationTag /*unused*/,const std::string & to_destination) 
+{   
+     from_source_ = from_source;
+     to_destination_ = to_destination;
+     Run();
+}
+
+void FileCopying::
 ValidateDirectories() const {
     if (!fs::exists(from_source_) || !fs::is_directory(from_source_)) {
         throw std::runtime_error("Исходная директория недоступна: " + from_source_.string());
@@ -31,8 +40,8 @@ ValidateDirectories() const {
 }
 
 
-auto
- FileCopying::Run() -> std::unordered_set<std::filesystem::path> {
+void
+FileCopying::Run() {
     BuildCRCCache();
     
     for (const auto& entry : fs::directory_iterator(from_source_)) {
@@ -44,8 +53,6 @@ auto
             }
         }
     }
-    
-    return copied_files_;
 }
 
 
@@ -79,6 +86,11 @@ ProcessFiles() {
 }
 
 void FileCopying::ProcessSingleFile(const fs::path& source) {
+
+    copied_files_.insert(source);  // Добавляем исходный путь в список для удаления. 
+                                   // Удаляем и то что уже было скопировано. 
+                                   // Если поставить в конец то не будет дубликаты удалять
+    
     const uint32_t source_crc = CalculateCRC(source);
     const fs::path dest_path = GetAvailablePath(source);
 
@@ -87,7 +99,7 @@ void FileCopying::ProcessSingleFile(const fs::path& source) {
     }
 
     CopyWithRetries(source, dest_path);
-    copied_files_.insert(source);  // Добавляем исходный путь в список
+    std::cout << "Успешно скопирован: " << dest_path.filename() << '\n';
 }
 
 

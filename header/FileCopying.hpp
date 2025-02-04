@@ -43,7 +43,9 @@ public:
 
 	FileCopying (FromSourceTag,    const std::string & from_source
 	           , ToDestinationTag, const std::string & to_destination);
-	auto Run() -> 	std::unordered_set<std::filesystem::path> ;
+	void Copying (FromSourceTag,    const std::string & from_source
+	            , ToDestinationTag, const std::string & to_destination);
+	void Run();
 	void DeleteCopingFiles ();
 };
 

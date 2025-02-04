@@ -54,7 +54,8 @@ void FileCopyManager::CopyFromFlash ()
                 continue;
             }
             // копируем во временные файлы фотографов
-            FileCopying(FromSourceTag{}, path, ToDestinationTag{}, folder_name_photograph).Run();
+            auto coping = FileCopying(FromSourceTag{}, path, ToDestinationTag{}, folder_name_photograph);
+            coping.Run();
 
             const auto path_for_archiv = path_save_.GetArchive();
             MakeDirectoryIfNotExists (path_for_archiv);
@@ -62,9 +63,8 @@ void FileCopyManager::CopyFromFlash ()
             // копируем в папку архив
             // добавить создание папки с сегодняшней датой
             std::filesystem::path date_folder_name = MakeDataDirectoryIfNotExists(path_for_archiv);
-            auto copy_to_archiv = FileCopying(FromSourceTag{}, path, ToDestinationTag{}, date_folder_name);
-            copy_to_archiv.Run();
-            copy_to_archiv.DeleteCopingFiles();
+            coping.Copying(FromSourceTag{}, path, ToDestinationTag{}, date_folder_name);
+            coping.DeleteCopingFiles();
         }
     }
 }
