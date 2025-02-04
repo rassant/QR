@@ -5,10 +5,12 @@
 //g++ -std=c++20 -O2 -Wall main.cpp ./source/* $(pkg-config --cflags --libs opencv4) -lqrencode -lboost_system -lboost_filesystem -lexiv2  && ./a.out
 
 
+#include <cstdlib>
 #include <nlohmann/json.hpp>
 /*#include "./header/Application.hpp"*/
 #include "./header/FileCopyManager.hpp"
 #include "./header/InputData.hpp"
+#include "./header/QRImageProcessor.hpp"
 #include <iostream>
 
 using namespace std;
@@ -18,6 +20,17 @@ using json = nlohmann::json;
 auto main(int argc, char** argv) -> int {
     ApplicationData input ("./input.json");
     FileCopyManager copy (*input.GetPhotographer(), *input.GetWorkDir());
+
+
+    СОЗДАТЬ уникальные имена файлов.
+    генерация пути должна быть офлайн. 
+    Создать класс имя сервера / дата / парк / файл.
+    QRImageProcessor должен наследоваться от сервера. 
+    или принимать пути при создании класса
+
+    QRImageProcessor qr;
+
+    qr.Process ("./Resource/TempWork/Masha/");
 
  /*try {*/
         /*Application app(argc, argv);*/
