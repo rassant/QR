@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MyApplication
+# Target rules for targets named OpenCVExample
 
 # Build rule for target.
-MyApplication: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MyApplication
-.PHONY : MyApplication
+OpenCVExample: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 OpenCVExample
+.PHONY : OpenCVExample
 
 # fast build rule for target.
-MyApplication/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/build
-.PHONY : MyApplication/fast
+OpenCVExample/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/build
+.PHONY : OpenCVExample/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -142,7 +142,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -150,7 +150,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 source/Application.o: source/Application.cpp.o
@@ -158,7 +158,7 @@ source/Application.o: source/Application.cpp.o
 
 # target to build an object file
 source/Application.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/Application.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/Application.cpp.o
 .PHONY : source/Application.cpp.o
 
 source/Application.i: source/Application.cpp.i
@@ -166,7 +166,7 @@ source/Application.i: source/Application.cpp.i
 
 # target to preprocess a source file
 source/Application.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/Application.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/Application.cpp.i
 .PHONY : source/Application.cpp.i
 
 source/Application.s: source/Application.cpp.s
@@ -174,7 +174,7 @@ source/Application.s: source/Application.cpp.s
 
 # target to generate assembly for a file
 source/Application.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/Application.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/Application.cpp.s
 .PHONY : source/Application.cpp.s
 
 source/FileCopyManager.o: source/FileCopyManager.cpp.o
@@ -182,7 +182,7 @@ source/FileCopyManager.o: source/FileCopyManager.cpp.o
 
 # target to build an object file
 source/FileCopyManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileCopyManager.cpp.o
 .PHONY : source/FileCopyManager.cpp.o
 
 source/FileCopyManager.i: source/FileCopyManager.cpp.i
@@ -190,7 +190,7 @@ source/FileCopyManager.i: source/FileCopyManager.cpp.i
 
 # target to preprocess a source file
 source/FileCopyManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileCopyManager.cpp.i
 .PHONY : source/FileCopyManager.cpp.i
 
 source/FileCopyManager.s: source/FileCopyManager.cpp.s
@@ -198,7 +198,7 @@ source/FileCopyManager.s: source/FileCopyManager.cpp.s
 
 # target to generate assembly for a file
 source/FileCopyManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopyManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileCopyManager.cpp.s
 .PHONY : source/FileCopyManager.cpp.s
 
 source/FileCopying.o: source/FileCopying.cpp.o
@@ -206,7 +206,7 @@ source/FileCopying.o: source/FileCopying.cpp.o
 
 # target to build an object file
 source/FileCopying.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopying.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileCopying.cpp.o
 .PHONY : source/FileCopying.cpp.o
 
 source/FileCopying.i: source/FileCopying.cpp.i
@@ -214,7 +214,7 @@ source/FileCopying.i: source/FileCopying.cpp.i
 
 # target to preprocess a source file
 source/FileCopying.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopying.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileCopying.cpp.i
 .PHONY : source/FileCopying.cpp.i
 
 source/FileCopying.s: source/FileCopying.cpp.s
@@ -222,7 +222,7 @@ source/FileCopying.s: source/FileCopying.cpp.s
 
 # target to generate assembly for a file
 source/FileCopying.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileCopying.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileCopying.cpp.s
 .PHONY : source/FileCopying.cpp.s
 
 source/FileWatcher.o: source/FileWatcher.cpp.o
@@ -230,7 +230,7 @@ source/FileWatcher.o: source/FileWatcher.cpp.o
 
 # target to build an object file
 source/FileWatcher.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileWatcher.cpp.o
 .PHONY : source/FileWatcher.cpp.o
 
 source/FileWatcher.i: source/FileWatcher.cpp.i
@@ -238,7 +238,7 @@ source/FileWatcher.i: source/FileWatcher.cpp.i
 
 # target to preprocess a source file
 source/FileWatcher.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileWatcher.cpp.i
 .PHONY : source/FileWatcher.cpp.i
 
 source/FileWatcher.s: source/FileWatcher.cpp.s
@@ -246,7 +246,7 @@ source/FileWatcher.s: source/FileWatcher.cpp.s
 
 # target to generate assembly for a file
 source/FileWatcher.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/FileWatcher.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/FileWatcher.cpp.s
 .PHONY : source/FileWatcher.cpp.s
 
 source/InputData.o: source/InputData.cpp.o
@@ -254,7 +254,7 @@ source/InputData.o: source/InputData.cpp.o
 
 # target to build an object file
 source/InputData.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/InputData.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/InputData.cpp.o
 .PHONY : source/InputData.cpp.o
 
 source/InputData.i: source/InputData.cpp.i
@@ -262,7 +262,7 @@ source/InputData.i: source/InputData.cpp.i
 
 # target to preprocess a source file
 source/InputData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/InputData.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/InputData.cpp.i
 .PHONY : source/InputData.cpp.i
 
 source/InputData.s: source/InputData.cpp.s
@@ -270,7 +270,7 @@ source/InputData.s: source/InputData.cpp.s
 
 # target to generate assembly for a file
 source/InputData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/InputData.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/InputData.cpp.s
 .PHONY : source/InputData.cpp.s
 
 source/QRImageProcessor.o: source/QRImageProcessor.cpp.o
@@ -278,7 +278,7 @@ source/QRImageProcessor.o: source/QRImageProcessor.cpp.o
 
 # target to build an object file
 source/QRImageProcessor.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/QRImageProcessor.cpp.o
 .PHONY : source/QRImageProcessor.cpp.o
 
 source/QRImageProcessor.i: source/QRImageProcessor.cpp.i
@@ -286,7 +286,7 @@ source/QRImageProcessor.i: source/QRImageProcessor.cpp.i
 
 # target to preprocess a source file
 source/QRImageProcessor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/QRImageProcessor.cpp.i
 .PHONY : source/QRImageProcessor.cpp.i
 
 source/QRImageProcessor.s: source/QRImageProcessor.cpp.s
@@ -294,7 +294,7 @@ source/QRImageProcessor.s: source/QRImageProcessor.cpp.s
 
 # target to generate assembly for a file
 source/QRImageProcessor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/source/QRImageProcessor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/source/QRImageProcessor.cpp.s
 .PHONY : source/QRImageProcessor.cpp.s
 
 # Help Target
@@ -305,7 +305,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MyApplication"
+	@echo "... OpenCVExample"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

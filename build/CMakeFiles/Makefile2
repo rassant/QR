@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/idis/code/Rashid/QR/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/MyApplication.dir/all
+all: CMakeFiles/OpenCVExample.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/MyApplication.dir/clean
+clean: CMakeFiles/OpenCVExample.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/MyApplication.dir
+# Target rules for target CMakeFiles/OpenCVExample.dir
 
 # All Build rule for target.
-CMakeFiles/MyApplication.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/idis/code/Rashid/QR/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target MyApplication"
-.PHONY : CMakeFiles/MyApplication.dir/all
+CMakeFiles/OpenCVExample.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/idis/code/Rashid/QR/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target OpenCVExample"
+.PHONY : CMakeFiles/OpenCVExample.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/MyApplication.dir/rule: cmake_check_build_system
+CMakeFiles/OpenCVExample.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/idis/code/Rashid/QR/build/CMakeFiles 8
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/MyApplication.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/OpenCVExample.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/idis/code/Rashid/QR/build/CMakeFiles 0
-.PHONY : CMakeFiles/MyApplication.dir/rule
+.PHONY : CMakeFiles/OpenCVExample.dir/rule
 
 # Convenience name for target.
-MyApplication: CMakeFiles/MyApplication.dir/rule
-.PHONY : MyApplication
+OpenCVExample: CMakeFiles/OpenCVExample.dir/rule
+.PHONY : OpenCVExample
 
 # clean rule for target.
-CMakeFiles/MyApplication.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApplication.dir/build.make CMakeFiles/MyApplication.dir/clean
-.PHONY : CMakeFiles/MyApplication.dir/clean
+CMakeFiles/OpenCVExample.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenCVExample.dir/build.make CMakeFiles/OpenCVExample.dir/clean
+.PHONY : CMakeFiles/OpenCVExample.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
