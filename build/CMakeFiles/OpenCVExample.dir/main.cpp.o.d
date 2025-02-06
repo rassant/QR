@@ -456,4 +456,5 @@ CMakeFiles/OpenCVExample.dir/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /usr/local/include/qrencode.h
+ /usr/local/include/qrencode.h \
+ /home/idis/code/Rashid/QR/./header/Random.hpp

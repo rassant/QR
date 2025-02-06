@@ -11,6 +11,7 @@
 #include "./header/FileCopyManager.hpp"
 #include "./header/InputData.hpp"
 #include "./header/QRImageProcessor.hpp"
+#include "./header/Random.hpp"
 #include <iostream>
 
 using namespace std;

@@ -1,10 +1,11 @@
 #include "../header/FileCopyManager.hpp"
 #include "../header/FileCopying.hpp"
 #include <filesystem>
-#include <chrono>
-#include <format>
 #include <iomanip>
 #include <sstream>
+#include <string>
+#include <chrono>
+#include <random>
 
 FileCopyManager::FileCopyManager ( PhotographerCollection path_to_flash 
                                  , WorkDirectoryManager   work_directories ) : paths_flash_ (std::move (path_to_flash))
@@ -81,8 +82,13 @@ MakeDataDirectoryIfNotExists(const std::filesystem::path & path_to_folder) -> st
     date_stream << std::put_time(&local_tm, "%d_%m_%Y");
     std::string date_folder_name = date_stream.str();
 
-    std::filesystem::path date_dir = path_to_folder / date_folder_name;
 
+    const int length_name_folder = 35;
+    size_t random_length_character = length_name_folder - date_folder_name.size();
+    std::string random_letters = GenerateRandomWord (random_length_character);
+    std::string randow_date_folder_name = date_folder_name + "_" + random_letters;
+
+    std::filesystem::path date_dir = path_to_folder / randow_date_folder_name;
 
     if (!std::filesystem::exists(date_dir))
     {
@@ -96,4 +102,21 @@ MakeDataDirectoryIfNotExists(const std::filesystem::path & path_to_folder) -> st
 
     }
     return date_dir;
+}
+
+
+auto
+FileCopyManager::GenerateRandomWord(size_t length) -> std::string {
+    std::mt19937 generator(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+    
+    std::string query;
+    query.resize (length);
+
+
+    for (char& character : query) {
+        const int random_letters = 26; 
+        const int rnd = std::uniform_int_distribution(0, random_letters - 1)(generator);
+        character = static_cast<char>('a' + rnd); 
+    }
+    return query;
 }
