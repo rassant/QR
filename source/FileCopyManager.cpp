@@ -11,7 +11,8 @@ FileCopyManager::FileCopyManager ( PhotographerCollection path_to_flash
                                  , WorkDirectoryManager   work_directories ) : paths_flash_ (std::move (path_to_flash))
                                                                              , path_save_   (std::move (work_directories))
 {
-CopyFromFlash ();
+    ScanDataDirectory ();
+    CopyFromFlash ();
 }
 
 
@@ -54,6 +55,7 @@ void FileCopyManager::CopyFromFlash ()
             {
                 continue;
             }
+
             // копируем во временные файлы фотографов
             auto coping = FileCopying(FromSourceTag{}, path, ToDestinationTag{}, folder_name_photograph);
             coping.Run();
@@ -71,9 +73,9 @@ void FileCopyManager::CopyFromFlash ()
 }
 
 
-auto FileCopyManager::
-MakeDataDirectoryIfNotExists(const std::filesystem::path & path_to_folder) -> std::filesystem::path
+auto FileCopyManager::MakeDataDirectoryIfNotExists(const std::filesystem::path& path_to_folder) -> std::filesystem::path
 {
+    // Получаем текущую дату
     auto now = std::chrono::system_clock::now();
     auto today = std::chrono::system_clock::to_time_t(now);
     std::tm local_tm = *std::localtime(&today);
@@ -82,31 +84,31 @@ MakeDataDirectoryIfNotExists(const std::filesystem::path & path_to_folder) -> st
     date_stream << std::put_time(&local_tm, "%d_%m_%Y");
     std::string date_folder_name = date_stream.str();
 
-
-    const int length_name_folder = 35;
-    size_t random_length_character = length_name_folder - date_folder_name.size();
-    std::string random_letters = GenerateRandomWord (random_length_character);
-    std::string randow_date_folder_name = date_folder_name + "_" + random_letters;
-
-    std::filesystem::path date_dir = path_to_folder / randow_date_folder_name;
-
-    if (!std::filesystem::exists(date_dir))
-    {
-        try {
-            std::filesystem::create_directories (date_dir);
-        }
-        catch (std::filesystem::filesystem_error &e)
+    // создаем ункальное имя директории
+    const size_t random_letter_count = 10;
+    std::filesystem::path new_dir = path_to_folder / (date_folder_name + "__" + GenerateRandomWord(random_letter_count));
+    
+    try {
+        if (!name_dates_infolders_.contains(date_folder_name))
         {
-            std::cerr << "Ошибка при создании папки с датой\n";
+            std::filesystem::create_directories(new_dir);
+            name_dates_infolders_[date_folder_name] = new_dir;
+        } else 
+        {
+            return name_dates_infolders_.at(date_folder_name);
         }
-
+            
+    } catch (const std::filesystem::filesystem_error& e) {
+        std::cerr << "Ошибка при создании папки с датой: " << e.what() << '\n';
+        return {}; // Возвращаем пустой путь при ошибке
     }
-    return date_dir;
+
+    return new_dir;
 }
 
-
 auto
-FileCopyManager::GenerateRandomWord(size_t length) -> std::string {
+FileCopyManager::
+GenerateRandomWord(size_t length) -> std::string {
     std::mt19937 generator(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
     
     std::string query;
@@ -119,4 +121,19 @@ FileCopyManager::GenerateRandomWord(size_t length) -> std::string {
         character = static_cast<char>('a' + rnd); 
     }
     return query;
+}
+
+
+void FileCopyManager::ScanDataDirectory ()
+{
+    if (std::filesystem::exists(path_save_.GetArchive()))
+    {
+        for (const std::filesystem::path &path: std::filesystem::directory_iterator (path_save_.GetArchive()))
+        {
+            if (!name_dates_infolders_.contains (path))
+            {
+                name_dates_infolders_[path.filename().string().substr(0,10)] = path;
+            }
+        }
+    }
 }
